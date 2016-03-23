@@ -10,7 +10,6 @@ private:
 	int currentFloor;
 	int floorDifference;
 	int waitingTime;
-	int stopCount;
 	string direction;
 public:
 
@@ -19,7 +18,7 @@ elevator() {
 	currentFloor = 0;
 	floorDifference = 0;
 	waitingTime = 0;
-	stopCount = 0;
+	//stopCount = 0;
 }
 int atDoor(int floor) {
 
@@ -50,11 +49,15 @@ void elevating(int floorRequest, string givenDirection) {
 }
 int returnTime() {
 	int timeCounter = 0;
-	for (int i = 0; i <= elevate[elevate.front()] ;  i++)
+	int stopCount = 0;
+	if (elevate.size() == 1)
 	{
-		//needs to keep track of stops
-		timeCounter++;
-		return timeCounter;
+	for (int i = 0; i <= elevate[elevate.front()] ;  i++)
+		{
+			//needs to keep track of stops
+			timeCounter++;
+			return timeCounter;
+		}
 	}
 }
 };
