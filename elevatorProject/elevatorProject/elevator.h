@@ -26,7 +26,7 @@ int atDoor(int floor) {
 }
 int inputRequest(int floor) {
 	elevate.push(floor);
-} 
+}
 void elevating(int floorRequest, string givenDirection) {
 
 	if (floorRequest < currentFloor)
