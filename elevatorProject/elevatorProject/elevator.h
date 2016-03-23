@@ -1,11 +1,11 @@
 #pragma once
-#include <queue>
+#include <vector>
 #include <string>
 using namespace std;
 
 class elevator {
 private:
-	queue<int>elevate;
+	vector<int>elevate;
 	bool Stop;
 	int currentFloor;
 	int floorDifference;
@@ -25,17 +25,30 @@ int atDoor(int floor) {
 
 }
 int inputRequest(int floor) {
-	elevate.push(floor);
-}
+	elevate.push_back(floor);
+} 
 void elevating(int floorRequest, string givenDirection) {
-
+	if (elevate.size() == 1)
+	{
+		currentFloor = floorRequest;
+		//call time function
+	}
 	if (floorRequest < currentFloor)
 	{
 		direction = "down";
 		floorDifference = currentFloor - floorRequest;
 		waitingTime = floorDifference + 0.5*stopCount;
 		currentFloor -= floorRequest;
+
 	}
+	if (floorRequest > currentFloor) {
+		direction = "up";
+		floorDifference = floorRequest - currentFloor;
+		currentFloor += floorRequest;
+	}
+
+}
+int returnTime() {
 
 }
 };
@@ -51,6 +64,8 @@ class User {
 	int waitingTime;
 	int Request;
 	User() {
-
+		Request = 0;
+		waitingTime = 0;
 	}
+
 };
