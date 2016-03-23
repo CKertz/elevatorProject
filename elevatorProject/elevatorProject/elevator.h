@@ -50,7 +50,7 @@ void elevating(int floorRequest, string givenDirection) {
 }
 int returnTime() {
 	int timeCounter = 0;
-	for (int i = 0, i <= elevate.front(), i++)
+	for (int i = 0; i <= elevate[elevate.front()] ;  i++)
 	{
 		//needs to keep track of stops
 		timeCounter++;
