@@ -31,7 +31,7 @@ void elevating(int floorRequest, string givenDirection) {
 	if (elevate.size() == 1)
 	{
 		currentFloor = floorRequest;
-		//call time function
+		returnTime();
 	}
 	if (floorRequest < currentFloor)
 	{
@@ -49,7 +49,13 @@ void elevating(int floorRequest, string givenDirection) {
 
 }
 int returnTime() {
-
+	int timeCounter = 0;
+	for (int i = 0, i <= elevate.front(), i++)
+	{
+		//needs to keep track of stops
+		timeCounter++;
+		return timeCounter;
+	}
 }
 };
 class outsideUser {
