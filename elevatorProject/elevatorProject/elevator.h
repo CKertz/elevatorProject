@@ -6,17 +6,20 @@ using namespace std;
 class elevator {
 private:
 	queue<int>elevate;
+	bool Stop;
+	int currentFloor;
+	int floorDifference;
+	int waitingTime;
+	int stopCount;
+	string direction;
 public:
 
-	bool Stop = false;
-	int currentFloor = 0;
-	int floorDifference = 0;
-	int waitingTime=0;
-	int stopCount = 0;
-	string direction;
-
 elevator() {
-
+	Stop = false;
+	currentFloor = 0;
+	floorDifference = 0;
+	waitingTime = 0;
+	stopCount = 0;
 }
 int atDoor(int floor) {
 
@@ -29,7 +32,7 @@ void elevating(int floorRequest, string givenDirection) {
 	if (floorRequest < currentFloor)
 	{
 		direction = "down";
-		currentFloor - floorRequest = floorDifference;
+		floorDifference = currentFloor - floorRequest;
 		waitingTime = floorDifference + 0.5*stopCount;
 		currentFloor -= floorRequest;
 	}
