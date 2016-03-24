@@ -26,20 +26,31 @@ int atDoor(int floor) {
 int inputRequest(int floor) {
 	elevate.push_back(floor);
 } 
-void elevating(int floorRequest, string givenDirection) {
+//elevating will take a request from a user, stop at any floors requested between currentFloor and floorRequest,
+//pop these values from the vector, and continue in that direction.
+void elevating(int floorRequest) {//string givenDirection parameter? not sure yet
+	vector<int>::iterator itr;
+	int i = 0;
+	for (itr = elevate.begin(); itr < elevate.end(); itr++, i++) //iterates vector, processes requests
+	{
+	if (elevate.size() == 0)
+		throw exception("No commands have been issued");
 	if (elevate.size() == 1)
-	{
-		currentFloor = floorRequest;
-		returnTime();
-	}
-	if (floorRequest < currentFloor)
-	{
-		direction = "down";
-		floorDifference = currentFloor - floorRequest;
-		waitingTime = floorDifference + 0.5*stopCount;
-		currentFloor -= floorRequest;
+		{
+			currentFloor = floorRequest;
+			returnTime();
+			elevate.erase(elevate.begin());
+		}
+	if (floorRequest < currentFloor)// needs to search for numbers ranging between floorRequest to currentFloor, visit, delete from elevate
+		{
+			direction = "down";
+			floorDifference = currentFloor - floorRequest;
+			waitingTime = floorDifference + 0.5*stopCount;
+			currentFloor -= floorRequest;
 
+		}
 	}
+	
 	if (floorRequest > currentFloor) {
 		direction = "up";
 		floorDifference = floorRequest - currentFloor;
@@ -50,6 +61,8 @@ void elevating(int floorRequest, string givenDirection) {
 int returnTime() {
 	int timeCounter = 0;
 	int stopCount = 0;
+	int j = 0;
+
 	if (elevate.size() == 1)
 	{
 	for (int i = 0; i <= elevate[elevate.front()] ;  i++)
@@ -58,6 +71,13 @@ int returnTime() {
 			timeCounter++;
 			return timeCounter;
 		}
+	// need to get front, iterate and see if anything is between it and where it's going, increment time accordingly
+	vector<int>::iterator floorItr;
+	for (floorItr = elevate.begin(); floorItr < elevate.end(); floorItr++, j++)
+	{
+		
+	}
+	
 	}
 }
 };
