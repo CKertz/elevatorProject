@@ -45,7 +45,7 @@ void elevating(int floorRequest)
 	}
 	for (itr = elevate.begin(); itr < elevate.end(); itr++, i++) //iterates vector, processes requests
 	{
-		if (*itr < currentFloor && direction == "down") 
+		if (*itr < currentFloor && direction == "down")
 		{
 			int *temp;
 			*temp = *itr;
