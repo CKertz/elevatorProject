@@ -3,6 +3,19 @@
 #include <string>
 using namespace std;
 
+class newElevator
+{
+	private:
+		int currentFloor;
+		//need priority queue of up requests ordered by min
+		//need priority queue of down requests ordered by max
+	public:
+		int getFloor() { return currentFloor; };
+		void goUp() { currentFloor++; };
+		void goDown() { currentFloor--; };
+
+};
+
 class elevator {
 private:
 	vector<int>elevate;
