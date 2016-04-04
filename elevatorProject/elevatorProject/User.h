@@ -71,4 +71,22 @@ class User
 		{
 			return hasArrived;
 		}
+		void incrementTime(bool didStop)
+		{
+			int baseTime = 1;
+			if (didStop)
+				baseTime *= 10;
+			if (!hasArrived)
+			{
+				if (!onElevator)
+				{
+					waitForElevatorTime += baseTime;
+				}
+				else
+				{
+					waitForDestinationTime += baseTime;
+				}
+				totalWaitTime += baseTime;
+			}
+		}
 };

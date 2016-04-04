@@ -65,3 +65,12 @@ bool allUsersArrived(vector<User> people)
 	}
 	return allArrived;
 }
+
+void incrementTimeAllUsers(vector<User> people, bool didStop)
+{	
+	vector<User>::iterator itr = people.begin();
+	while (itr != people.end())
+	{		
+		itr->incrementTime(didStop);
+	}
+}
