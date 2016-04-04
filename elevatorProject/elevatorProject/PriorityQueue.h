@@ -14,8 +14,8 @@ class priorityUpQueue
 		vector<itemType> data;
 		compare comp;
 	public:
-		priorityQueue() {}
-		void push(const Item_Type& item)
+		priorityUpQueue() {}
+		void push(const itemType& item)
 		{
 			data.push_back(item);
 			int child = size() - 1; 
@@ -64,8 +64,8 @@ private:
 	vector<itemType> data;
 	compare comp;
 public:
-	priorityQueue() {}
-	void push(const Item_Type& item)
+	priorityDownQueue() {}
+	void push(const itemType& item)
 	{
 		data.push_back(item);
 		int child = size() - 1;

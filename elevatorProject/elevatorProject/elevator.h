@@ -10,27 +10,12 @@ class Elevator
 {
 	private:
 		int currentFloor;
-		priorityUpQueue<int> currentUps;
-		priorityUpQueue<int> upWaitList;
-		priorityDownQueue<int> currentDowns;
-		priorityDownQueue<int> downWaitList;
+		direction currentDirection;
+		vector<User> inside;
 	public:
+		Elevator() {}
 		int getFloor() { return currentFloor; };
 		void goUp() { currentFloor++; };
 		void goDown() { currentFloor--; };
-		void completeCurrentDowns()
-		{
-			while (currentFloor > minFloor)
-			{
-
-			}
-		}
-		void completeCurrentUps()
-		{
-			while (currentFloor < maxFloor)
-			{
-
-			}
-		}
 };
 
