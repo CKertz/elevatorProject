@@ -67,4 +67,8 @@ class User
 			}
 			cout << currentFloor << " " <<  desiredFloor << " " << waitForElevatorTime << " " << waitForDestinationTime << " " << totalWaitTime << endl;
 		}
+		bool arrived()
+		{
+			return hasArrived;
+		}
 };

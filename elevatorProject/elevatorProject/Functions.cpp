@@ -11,7 +11,22 @@ void simulation(Elevator elevator, vector<User>people)
 	{
 		while (elevator.getFloor() != MAXFLOOR)
 		{
-
+			elevator.goUp();
 		}
 	}
+}
+
+bool allUsersArrived(vector<User> people)
+{
+	bool allArrived = true;
+	vector<User>::iterator itr = people.begin();
+	while (itr != people.end())
+	{
+		if (!(itr->arrived()))
+		{
+			allArrived = false;
+		}
+		itr++;
+	}
+	return allArrived;
 }
