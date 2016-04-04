@@ -14,6 +14,8 @@ class User
 		int waitForElevatorTime;
 		int waitForDestinationTime;
 		int totalWaitTime;
+		bool onElevator;
+		bool hasArrived;
 		direction outSideRequest;
 	public:
 		User()
@@ -30,7 +32,7 @@ class User
 			}
 			else if (currentFloor == MINFLOOR)
 			{
-				desiredFloor = rand() % MAXFLOOR + 1;
+				desiredFloor = rand() % MAXFLOOR + 2;
 				outSideRequest = UP;
 			}
 			else
@@ -47,6 +49,8 @@ class User
 					desiredFloor = rand() % currentFloor + MINFLOOR-1;
 				}
 			}
+			onElevator = false;
+			hasArrived = false;
 		}
 		int getCurrentFloor() { return currentFloor; }
 		int getInsideRequest() { return desiredFloor; }

@@ -7,6 +7,7 @@ int main()
 {
 	//Declarations:
 	vector<User> people;
+	Elevator elevator;
 	srand(time(NULL));
 	///////////////
 	for (int i = 0; i < MAXUSERS; i++)

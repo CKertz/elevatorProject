@@ -11,9 +11,8 @@ class Elevator
 	private:
 		int currentFloor;
 		direction currentDirection;
-		vector<User> inside;
 	public:
-		Elevator() {}
+		Elevator() { currentFloor = 1; }
 		int getFloor() { return currentFloor; };
 		void goUp() { currentFloor++; };
 		void goDown() { currentFloor--; };
