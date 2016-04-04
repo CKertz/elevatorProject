@@ -1,4 +1,5 @@
 #include "elevator.h"
+#include "PrototypeDefinitions.h"
 #include <iostream>
 
 using namespace std;
