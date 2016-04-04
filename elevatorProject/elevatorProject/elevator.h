@@ -14,7 +14,19 @@ class Elevator
 	public:
 		Elevator() { currentFloor = 1; }
 		int getFloor() { return currentFloor; };
-		void goUp() { currentFloor++; };
-		void goDown() { currentFloor--; };
+		void goUp()
+		{ 
+			if (currentFloor < MAXFLOOR)
+				currentFloor++;
+			else
+				exception("At highest floor!");
+		};
+		void goDown() 
+		{ 
+			if (currentFloor > MINFLOOR)
+				currentFloor--;
+			else
+				exception("At lowest floor!");
+		};
 };
 
