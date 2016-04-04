@@ -12,32 +12,43 @@ void simulation(Elevator elevator, vector<User>people)
 	{
 		while (elevator.getFloor() != MAXFLOOR)
 		{
+			if (generateUser(people)) // If statement is to determine if a new entry should be added to the elevator's tasks. If true, add the last user's currentFloor
+			{
 
+			}
 			
 			elevator.goUp();
 		}
 		while (elevator.getFloor() != MINFLOOR)
 		{
+			if (generateUser(people))
+			{
 
+			}
 
 			elevator.goDown();
 		}
 	}
 }
 
-void generateUser(vector<User> people) // Used to create new people for the scenario
+bool generateUser(vector<User> people) // Used to create new people for the scenario
 {
-	int dice = rand() % 6 + 1; // Roll six sided dice to determine if a user is generated or not
-	if (dice % 2) // If even, add a user
+	if (people.size() != MAXUSERS)
 	{
-		User* temp = new User;
-		people.push_back(*temp);
-		delete temp;
+		int dice = rand() % 6 + 1; // Roll six sided dice to determine if a user is generated or not
+		if (dice % 2) // If even, add a user
+		{
+			User* temp = new User;
+			people.push_back(*temp);
+			delete temp;
+			return true;
+		}
+		else // If odd, return
+		{
+			return false;
+		}
 	}
-	else // If odd, return
-	{
-		return;
-	}
+	return false;
 }
 
 bool allUsersArrived(vector<User> people)
