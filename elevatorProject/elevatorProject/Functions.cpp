@@ -7,28 +7,13 @@ using namespace std;
 
 void simulation(Elevator elevator, vector<User>people)
 {
-	int dice;
-	bool done = false; //determined if all users have arrived AND if the max number of generated users has been met
-	while (!done)
+	while (!allUsersArrived(people) && !(people.size() == MAXUSERS)) //determined if all users have arrived AND if the max number of generated users has been met
 	{
-		while (elevator.getFloor() != MAXFLOOR)
+		if (generateUser(people)) // If statement is to determine if a new entry should be added to the elevator's tasks. If true, add the last user's currentFloor
 		{
-			if (generateUser(people)) // If statement is to determine if a new entry should be added to the elevator's tasks. If true, add the last user's currentFloor
-			{
-
-			}
-			
-			elevator.goUp();
+			//Need function to add most recently generated user's current floor to the elevator's list/queue/whatever of floors to visit
 		}
-		while (elevator.getFloor() != MINFLOOR)
-		{
-			if (generateUser(people))
-			{
-
-			}
-
-			elevator.goDown();
-		}
+		elevator.progress();
 	}
 }
 

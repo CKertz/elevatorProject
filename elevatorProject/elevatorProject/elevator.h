@@ -28,5 +28,9 @@ class Elevator
 			else
 				exception("At lowest floor!");
 		};
+		void progress()
+		{
+
+		}
 };
 

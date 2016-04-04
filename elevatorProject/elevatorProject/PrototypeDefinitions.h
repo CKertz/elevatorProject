@@ -11,4 +11,4 @@ using namespace std;
 void simulation(Elevator elevator, vector<User>people);
 bool generateUser(vector<User> people);
 bool allUsersArrived(vector<User> people);
-void incrementTime(vector<User> people, bool didStop);
+void incrementTimeAllUsers(vector<User> people, bool didStop);

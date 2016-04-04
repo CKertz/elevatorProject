@@ -16,7 +16,7 @@ class User
 		int totalWaitTime;
 		bool onElevator;
 		bool hasArrived;
-		direction outSideRequest;
+		direction outSideRequest; // Will mostly likely be depricated
 	public:
 		User()
 		{
@@ -54,7 +54,7 @@ class User
 		}
 		int getCurrentFloor() { return currentFloor; }
 		int getInsideRequest() { return desiredFloor; }
-		direction getOutSideRequest() { return outSideRequest; }
+		direction getOutSideRequest() { return outSideRequest; } // Try not to use
 		void printUserStats()
 		{
 			if (outSideRequest == DOWN)
