@@ -79,6 +79,10 @@ class User
 			onElevator = false;
 			hasArrived = true;
 		}
+		bool onBoard()
+		{
+			return onElevator;
+		}
 		bool arrived()
 		{
 			return hasArrived;

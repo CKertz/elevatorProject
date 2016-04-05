@@ -5,23 +5,24 @@
 
 using namespace std;
 
-void simulation(Elevator elevator, vector<User>waitList, vector<User>arrivedList)
+void simulation(Elevator elevator, vector<User>people)
 {
-	vector<User> onElevatorList;
 	int total = 0;
 	//First User is always generated
 	User* temp = new User;
-	waitList.push_back(*temp);
+	people.push_back(*temp);
+	temp->printUserStats();
+	system("pause");
 	delete temp;
 	total++;
 	//Loop while the arrivedList does not contain the max amount of the users the program can generate
-	cout << "First user created!" << endl;
+	//cout << "First user created!" << endl;
 	do
 	{
-		elevator.progress(waitList, onElevatorList, arrivedList);
-		generateUser(waitList, total);
+		elevator.progress(people);
+		generateUser(people, total);
 	} 
-	while (arrivedList.size() != MAXUSERS);
+	while (!allUsersArrived(people) && total != MAXUSERS);
 }
 
 void generateUser(vector<User> people, int &total) // Used to create new people for the scenario
@@ -34,13 +35,15 @@ void generateUser(vector<User> people, int &total) // Used to create new people 
 			cout << "User generated!" << endl;
 			User* temp = new User;
 			people.push_back(*temp);
+			temp->printUserStats();
+			system("pause");
 			delete temp;
 			total++;
 		}
 	}		
 }
 
-bool allUsersArrived(vector<User> people) // to be depricated
+bool allUsersArrived(vector<User> people)
 {
 	bool allArrived = true;
 	vector<User>::iterator itr = people.begin();

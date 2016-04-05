@@ -30,6 +30,6 @@ class Elevator
 			else
 				exception("At lowest floor!");
 		};
-		void progress(vector<User>waitList, vector<User>onElevatorList, vector<User>arrivedList);
+		void progress(vector<User>people);
 };
 

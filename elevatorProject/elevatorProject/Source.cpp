@@ -8,16 +8,15 @@ using namespace std;
 int main() 
 {
 	//Declarations:
-	vector<User> waitList;
-	vector<User> arrivedList;
+	vector<User> people;
 	Elevator elevator;
 	srand(time(NULL));
 	///////////////
 	cout << "Begin simulation" << endl;
-	simulation(elevator, waitList, arrivedList);
+	simulation(elevator, people);
 	for (int i = 0; i < MAXUSERS; i++)
 	{
-		arrivedList[i].printUserStats();
+		people[i].printUserStats();
 	}
 	return 0;
 }
