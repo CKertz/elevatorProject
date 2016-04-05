@@ -7,7 +7,7 @@ using namespace std;
 
 void simulation(Elevator elevator, vector<User>waitList, vector<User>arrivedList)
 {
-	vector<User> inProgressList;
+	vector<User> onElevatorList;
 	//First User is always generated
 	User* temp = new User;
 	waitList.push_back(*temp);
@@ -15,7 +15,7 @@ void simulation(Elevator elevator, vector<User>waitList, vector<User>arrivedList
 	//Loop while the arrivedList does not contain the max amount of the users the program can generate
 	do
 	{
-		elevator.progress(waitList, inProgressList, arrivedList);
+		elevator.progress(waitList, onElevatorList, arrivedList);
 		generateUser(waitList);
 	} 
 	while (arrivedList.size() != MAXUSERS);
