@@ -6,7 +6,7 @@ using namespace std;
 
 //priorityQueue class based on example given in slides and source code from Blackboard
 
-template < typename itemType, typename compare = less<itemType> >
+template < typename itemType, typename compare = greater<itemType> >
 
 class priorityUpQueue
 { 
@@ -56,7 +56,7 @@ class priorityUpQueue
 		const itemType& top() const { return data.front(); }
 };
 
-template < typename itemType, typename compare = greater<itemType> >
+template < typename itemType, typename compare = less<itemType> >
 
 class priorityDownQueue
 {

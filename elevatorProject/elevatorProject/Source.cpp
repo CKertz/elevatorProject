@@ -13,21 +13,11 @@ int main()
 	Elevator elevator;
 	srand(time(NULL));
 	///////////////
-
-
-
-
-
-	/*for (int i = 0; i < MAXUSERS; i++)
-	{
-		User* temp = new User;
-		people.push_back(*temp);
-		delete temp;
-	}
+	cout << "Begin simulation" << endl;
+	simulation(elevator, waitList, arrivedList);
 	for (int i = 0; i < MAXUSERS; i++)
 	{
-		people[i].printUserStats();
-	}*/
-
+		arrivedList[i].printUserStats();
+	}
 	return 0;
 }

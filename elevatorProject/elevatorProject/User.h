@@ -70,6 +70,15 @@ class User
 			}
 			cout << currentFloor << " " <<  desiredFloor << " " << waitForElevatorTime << " " << waitForDestinationTime << " " << totalWaitTime << endl;
 		}
+		void board()
+		{
+			onElevator = true;
+		}
+		void arrive()
+		{
+			onElevator = false;
+			hasArrived = true;
+		}
 		bool arrived()
 		{
 			return hasArrived;

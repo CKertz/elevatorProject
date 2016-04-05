@@ -8,37 +8,36 @@ using namespace std;
 void simulation(Elevator elevator, vector<User>waitList, vector<User>arrivedList)
 {
 	vector<User> onElevatorList;
+	int total = 0;
 	//First User is always generated
 	User* temp = new User;
 	waitList.push_back(*temp);
 	delete temp;
+	total++;
 	//Loop while the arrivedList does not contain the max amount of the users the program can generate
+	cout << "First user created!" << endl;
 	do
 	{
 		elevator.progress(waitList, onElevatorList, arrivedList);
-		generateUser(waitList);
+		generateUser(waitList, total);
 	} 
 	while (arrivedList.size() != MAXUSERS);
 }
 
-bool generateUser(vector<User> people) // Used to create new people for the scenario
+void generateUser(vector<User> people, int &total) // Used to create new people for the scenario
 {
-	if (people.size() != MAXUSERS)
+	if (total != MAXUSERS)
 	{
 		int dice = rand() % 6 + 1; // Roll six sided dice to determine if a user is generated or not
 		if (dice % 2) // If even, add a user
 		{
+			cout << "User generated!" << endl;
 			User* temp = new User;
 			people.push_back(*temp);
 			delete temp;
-			return true;
+			total++;
 		}
-		else // If odd, return
-		{
-			return false;
-		}
-	}
-	return false;
+	}		
 }
 
 bool allUsersArrived(vector<User> people) // to be depricated
@@ -58,9 +57,11 @@ bool allUsersArrived(vector<User> people) // to be depricated
 
 void incrementTimeAllUsers(vector<User> people, bool didStop)
 {	
+	cout << "Time incremented" << endl; 
 	vector<User>::iterator itr = people.begin();
 	while (itr != people.end())
 	{		
 		itr->incrementTime(didStop);
+		itr++;
 	}
 }
