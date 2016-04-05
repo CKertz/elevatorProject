@@ -5,16 +5,20 @@
 
 using namespace std;
 
-void simulation(Elevator elevator, vector<User>people)
+void simulation(Elevator elevator, vector<User>waitList, vector<User>arrivedList)
 {
-	while (!allUsersArrived(people) && !(people.size() == MAXUSERS)) //determined if all users have arrived AND if the max number of generated users has been met
+	vector<User> inProgressList;
+	//First User is always generated
+	User* temp = new User;
+	waitList.push_back(*temp);
+	delete temp;
+	//Loop while the arrivedList does not contain the max amount of the users the program can generate
+	do
 	{
-		if (generateUser(people)) // If statement is to determine if a new entry should be added to the elevator's tasks. If true, add the last user's currentFloor
-		{
-			//Need function to add most recently generated user's current floor to the elevator's list/queue/whatever of floors to visit
-		}
-		elevator.progress();
-	}
+		elevator.progress(waitList, inProgressList, arrivedList);
+		generateUser(waitList);
+	} 
+	while (arrivedList.size() != MAXUSERS);
 }
 
 bool generateUser(vector<User> people) // Used to create new people for the scenario
@@ -37,7 +41,7 @@ bool generateUser(vector<User> people) // Used to create new people for the scen
 	return false;
 }
 
-bool allUsersArrived(vector<User> people)
+bool allUsersArrived(vector<User> people) // to be depricated
 {
 	bool allArrived = true;
 	vector<User>::iterator itr = people.begin();

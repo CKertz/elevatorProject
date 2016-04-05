@@ -16,8 +16,9 @@ class User
 		int totalWaitTime;
 		bool onElevator;
 		bool hasArrived;
-		direction outSideRequest; // Will mostly likely be depricated
+		direction outSideRequest;
 	public:
+		//The Default Constructor
 		User()
 		{
 			int temp;
@@ -52,9 +53,11 @@ class User
 			onElevator = false;
 			hasArrived = false;
 		}
+		//Getter functions
 		int getCurrentFloor() { return currentFloor; }
 		int getInsideRequest() { return desiredFloor; }
-		direction getOutSideRequest() { return outSideRequest; } // Try not to use
+		direction getOutSideRequest() { return outSideRequest; }
+		//Function used to print the stats of users
 		void printUserStats()
 		{
 			if (outSideRequest == DOWN)
@@ -71,6 +74,7 @@ class User
 		{
 			return hasArrived;
 		}
+		//Function used to advance the amount of wait time has passed
 		void incrementTime(bool didStop)
 		{
 			int baseTime = 1;

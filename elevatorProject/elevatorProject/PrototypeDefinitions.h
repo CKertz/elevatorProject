@@ -8,7 +8,7 @@ using namespace std;
 
 /*--------------------------------Prototype Definitions--------------------------------*/
 
-void simulation(Elevator elevator, vector<User>people);
+void simulation(Elevator elevator, vector<User>people, vector<User>arrivedList);
 bool generateUser(vector<User> people);
 bool allUsersArrived(vector<User> people);
 void incrementTimeAllUsers(vector<User> people, bool didStop);
