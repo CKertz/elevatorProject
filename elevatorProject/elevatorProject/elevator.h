@@ -11,6 +11,7 @@ class Elevator
 	private:
 		int currentFloor;
 		direction currentDirection;
+		vector<int> nextFloors;
 	public:
 		Elevator() { currentFloor = 1; }
 		int getFloor() { return currentFloor; };
@@ -30,7 +31,7 @@ class Elevator
 		};
 		void progress()
 		{
-
+			
 		}
 };
 
