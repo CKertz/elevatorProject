@@ -5,39 +5,46 @@
 
 using namespace std;
 
-void simulation(Elevator elevator, vector<User>people)
+void simulation(Elevator &elevator, vector<User>&people)
 {
-	while (!allUsersArrived(people) && !(people.size() == MAXUSERS)) //determined if all users have arrived AND if the max number of generated users has been met
+	//Declarations:
+	vector<User>::iterator peopleITR;
+	int total = 0;
+	//First User is always generated
+	User* temp = new User;
+	people.push_back(*temp);
+	temp->printUserStats();
+	//system("pause");
+	total++;
+	///////////////
+	//Loop while the arrivedList does not contain the max amount of the users the program can generate
+	//cout << "First user created!" << endl;
+	do
 	{
-		if (generateUser(people)) // If statement is to determine if a new entry should be added to the elevator's tasks. If true, add the last user's currentFloor
-		{
-			//Need function to add most recently generated user's current floor to the elevator's list/queue/whatever of floors to visit
-		}
-		elevator.progress();
-	}
+		elevator.progress(people);
+		generateUser(people, total);
+	} 
+	while (!allUsersArrived(people) && total != MAXUSERS);	
 }
 
-bool generateUser(vector<User> people) // Used to create new people for the scenario
+void generateUser(vector<User> &people, int &total) // Used to create new people for the scenario
 {
-	if (people.size() != MAXUSERS)
+	if (total != MAXUSERS)
 	{
 		int dice = rand() % 6 + 1; // Roll six sided dice to determine if a user is generated or not
 		if (dice % 2) // If even, add a user
 		{
+			cout << "User generated!" << endl;
 			User* temp = new User;
 			people.push_back(*temp);
-			delete temp;
-			return true;
+			temp->printUserStats();
+			//system("pause");
+			total++;
 		}
-		else // If odd, return
-		{
-			return false;
-		}
-	}
-	return false;
+	}		
 }
 
-bool allUsersArrived(vector<User> people)
+bool allUsersArrived(vector<User> &people)
 {
 	bool allArrived = true;
 	vector<User>::iterator itr = people.begin();
@@ -52,11 +59,13 @@ bool allUsersArrived(vector<User> people)
 	return allArrived;
 }
 
-void incrementTimeAllUsers(vector<User> people, bool didStop)
+void incrementTimeAllUsers(vector<User> &people, bool didStop)
 {	
+	cout << "Time incremented" << endl; 
 	vector<User>::iterator itr = people.begin();
 	while (itr != people.end())
-	{		
+	{	
 		itr->incrementTime(didStop);
+		itr++;
 	}
 }

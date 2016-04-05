@@ -10,13 +10,14 @@ class Elevator
 {
 	private:
 		int currentFloor;
+		priorityUpQueue<int> goingUp;
+		priorityDownQueue<int> goingDown;
 		direction currentDirection;
-		vector<int> nextFloors;
 	public:
 		Elevator() { currentFloor = 1; }
 		int getFloor() { return currentFloor; };
 		void goUp()
-		{ 
+		{
 			if (currentFloor < MAXFLOOR)
 				currentFloor++;
 			else
@@ -29,9 +30,6 @@ class Elevator
 			else
 				exception("At lowest floor!");
 		};
-		void progress()
-		{
-			
-		}
+		void progress(vector<User>people);
 };
 
