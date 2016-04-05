@@ -52,6 +52,10 @@ class User
 			}
 			onElevator = false;
 			hasArrived = false;
+			if (desiredFloor > MAXFLOOR)
+				desiredFloor == MAXFLOOR;
+			if (desiredFloor < MINFLOOR)
+				desiredFloor == MINFLOOR;
 		}
 		//Getter functions
 		int getCurrentFloor() { return currentFloor; }
@@ -60,24 +64,27 @@ class User
 		//Function used to print the stats of users
 		void printUserStats()
 		{
+			cout << endl;
 			if (outSideRequest == DOWN)
 			{
-				cout << "DOWN" << endl;
+				cout << "Request Down" << endl;
 			}
 			else
 			{
-				cout << "UP" << endl;
+				cout << "Request Up" << endl;
 			}
 			cout << currentFloor << " " <<  desiredFloor << " " << waitForElevatorTime << " " << waitForDestinationTime << " " << totalWaitTime << endl;
+			cout << endl;
 		}
 		void board()
 		{
 			onElevator = true;
 		}
-		void arrive()
+		void arrive(int elevatorCurrentFloor)
 		{
 			onElevator = false;
 			hasArrived = true;
+			currentFloor = elevatorCurrentFloor;
 		}
 		bool onBoard()
 		{

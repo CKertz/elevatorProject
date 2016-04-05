@@ -1,6 +1,7 @@
 #pragma once
 #include <vector>
 #include <functional>
+#include "Header.h"
 
 using namespace std;
 
@@ -8,6 +9,7 @@ using namespace std;
 
 template < typename itemType, typename compare = greater<itemType> >
 
+//Attempt to make a universal priorityQueue. Use the direction enum to help
 class priorityUpQueue
 { 
 	private:

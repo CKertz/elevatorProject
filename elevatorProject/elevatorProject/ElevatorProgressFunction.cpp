@@ -7,14 +7,14 @@
 
 using namespace std;
 
-void Elevator::progress(vector<User>people)
+void Elevator::progress(vector<User>&people)
 {
 	//Declarations:
 	bool firstFound = false;
 	bool atStop;
 	vector<User>::iterator peopleITR = people.begin();
 	///////////////
-	cout << currentFloor << endl;
+	cout << "Elevator current floor: " << currentFloor << endl;
 	/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 	if (goingUp.size() == 0 && goingDown.size() == 0 && people.size() != 0) // Used for checking if both queues are empty and if the list of people is not empty. Used for choosing which direction to take next
 	{
@@ -46,7 +46,7 @@ void Elevator::progress(vector<User>people)
 	peopleITR = people.begin();
 	do
 	{
-		cout << "Universal check" << endl;
+		//cout << "Universal check" << endl;
 		if (peopleITR->getOutSideRequest() == currentDirection) // Make sure they have the same desired direction as the current direction of the elevator
 		{
 			if (!(peopleITR->onBoard()) && !(peopleITR->arrived()))
@@ -88,33 +88,29 @@ void Elevator::progress(vector<User>people)
 		incrementTimeAllUsers(people, true);
 		do //Check to see who gets on and off
 		{
-			cout << "success" << endl;
 			if ((peopleITR->getCurrentFloor() == currentFloor) && (peopleITR->getOutSideRequest() == currentDirection) && (!(peopleITR->onBoard())) && (!(peopleITR->arrived())))
 			{
-				cout << "Universal board" << endl;
+				cout << "Boarding" << endl;
 				peopleITR->board(); // Board the elevator
 				if (currentDirection == UP) // Add the new user's desired floor to the priority queue
 					goingUp.push(peopleITR->getInsideRequest());
 				else
 					goingDown.push(peopleITR->getInsideRequest());
 			}
-			if ((peopleITR->getInsideRequest() == currentFloor) && (!(peopleITR->onBoard())) && (!(peopleITR->arrived())))
+			if ((peopleITR->getInsideRequest() == currentFloor) && (!(peopleITR->arrived())))
 			{
-				cout << "Universal arrive" << endl;
-				peopleITR->arrive();
+				cout << "Arrival" << endl;
+				peopleITR->arrive(currentFloor);
 			}
-			cout << "Prepare increment" << endl;
 			if (peopleITR != people.end())
 			{
 				peopleITR++;
 			}
-		} while (peopleITR != people.end()); 
-		cout << "success" << endl;
+		} while (peopleITR != people.end());
 		if (currentDirection == UP && !goingUp.empty())
 			goingUp.pop(); // Top of the queue has been visited, remove from queue
 		else if (!goingDown.empty())
 			goingDown.pop(); // Top of the queue has been visited, remove from queue
-		cout << "past poping" << endl;
 	}
 	else
 	{
@@ -127,13 +123,17 @@ void Elevator::progress(vector<User>people)
 		{
 			if (goingUp.top() > currentFloor)
 			{
+				cout << "Previous floor: " << currentFloor << endl;
 				cout << "Go up" << endl;
 				goUp();
+				cout << "New floor: " << currentFloor << endl;
 			}
 			else
 			{
+				cout << "Previous floor: " << currentFloor << endl;
 				cout << "Go down" << endl;
 				goDown();
+				cout << "New floor: " << currentFloor << endl;
 			}
 		}
 	}
@@ -141,13 +141,17 @@ void Elevator::progress(vector<User>people)
 	{
 		if (goingDown.top() > currentFloor)
 		{
+			cout << "Previous floor: " << currentFloor << endl;
 			cout << "Go up" << endl;
 			goUp();
+			cout << "New floor: " << currentFloor << endl;
 		}
 		else
 		{
+			cout << "Previous floor: " << currentFloor << endl;
 			cout << "Go down" << endl;
 			goDown();
+			cout << "New floor: " << currentFloor << endl;
 		}
 	}
 	/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/

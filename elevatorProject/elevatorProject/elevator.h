@@ -30,6 +30,6 @@ class Elevator
 			else
 				exception("At lowest floor!");
 		};
-		void progress(vector<User>people);
+		void progress(vector<User>&people);
 };
 
