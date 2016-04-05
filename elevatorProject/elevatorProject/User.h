@@ -95,6 +95,7 @@ class User
 				baseTime *= 10;
 			if (!hasArrived)
 			{
+				cout << "Increment!" << endl;
 				if (!onElevator)
 				{
 					waitForElevatorTime += baseTime;

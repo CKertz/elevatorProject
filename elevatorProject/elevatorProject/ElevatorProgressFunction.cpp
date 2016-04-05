@@ -34,6 +34,7 @@ void Elevator::progress(vector<User>people)
 					currentDirection = DOWN;
 					goingDown.push(peopleITR->getCurrentFloor());
 				}
+				firstFound = true;
 			}
 			if (peopleITR != people.end())
 				firstFound = true;
@@ -85,7 +86,7 @@ void Elevator::progress(vector<User>people)
 	{
 		cout << "Univeral arrived" << endl;
 		incrementTimeAllUsers(people, true);
-		do
+		do //Check to see who gets on and off
 		{
 			cout << "success" << endl;
 			if ((peopleITR->getCurrentFloor() == currentFloor) && (peopleITR->getOutSideRequest() == currentDirection) && (!(peopleITR->onBoard())) && (!(peopleITR->arrived())))
@@ -107,8 +108,13 @@ void Elevator::progress(vector<User>people)
 			{
 				peopleITR++;
 			}
-		} while (peopleITR != people.end()); //Check to see who gets on
-		goingUp.pop(); // Top of the queue has been visited, remove from queue
+		} while (peopleITR != people.end()); 
+		cout << "success" << endl;
+		if (currentDirection == UP && !goingUp.empty())
+			goingUp.pop(); // Top of the queue has been visited, remove from queue
+		else if (!goingDown.empty())
+			goingDown.pop(); // Top of the queue has been visited, remove from queue
+		cout << "past poping" << endl;
 	}
 	else
 	{
@@ -117,27 +123,31 @@ void Elevator::progress(vector<User>people)
 	/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 	if (currentDirection == UP)
 	{
-		if (currentFloor != MAXFLOOR)
+		if (!goingUp.empty())
+		{
+			if (goingUp.top() > currentFloor)
+			{
+				cout << "Go up" << endl;
+				goUp();
+			}
+			else
+			{
+				cout << "Go down" << endl;
+				goDown();
+			}
+		}
+	}
+	else if (!goingDown.empty())
+	{
+		if (goingDown.top() > currentFloor)
 		{
 			cout << "Go up" << endl;
 			goUp();
 		}
 		else
 		{
-			cout << "Exception up" << endl;
-		}
-	}
-	else
-	{
-		if (currentFloor != MINFLOOR)
-		{
 			cout << "Go down" << endl;
 			goDown();
-		}
-		else
-		{
-			cout << "Exception down" << endl;
-			cout << goingDown.size() << endl;
 		}
 	}
 	/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/

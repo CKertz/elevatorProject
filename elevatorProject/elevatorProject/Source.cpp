@@ -14,6 +14,7 @@ int main()
 	///////////////
 	cout << "Begin simulation" << endl;
 	simulation(elevator, people);
+	cout << people.size() << endl;
 	for (int i = 0; i < MAXUSERS; i++)
 	{
 		people[i].printUserStats();
