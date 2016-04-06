@@ -12,6 +12,3 @@ int const MAXUSERS = 12;
 enum direction{UP, DOWN};
 /////////////
 
-//Prototype Definitions:
-//void simulation(Elevator elevator, vector<User>people);
-////////////////////////
