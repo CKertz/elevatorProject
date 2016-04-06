@@ -80,15 +80,16 @@ class User
 		void printUserStats()
 		{
 			cout << endl;
+			cout << creationOrder << ". ";
 			if (outSideRequest == DOWN)
 			{
-				cout << "Request Down" << endl;
+				cout << "Requested to go down." << endl;
 			}
 			else
 			{
-				cout << "Request Up" << endl;
+				cout << "Requested to go up." << endl;
 			}
-			cout << originalCurrent << " " << currentFloor << " " << desiredFloor << " " << endl;//<< waitForElevatorTime << " " << waitForDestinationTime << " " << totalWaitTime << endl;
+			cout << "Original floor: " << originalCurrent << "  |New current floor: " << currentFloor << " |Originally desired floor: " << desiredFloor << " |Waiting for elevator: " << waitForElevatorTime << " |Waiting to arrive: " << waitForDestinationTime << " |Total Wait time: " << totalWaitTime << endl;
 			cout << endl;
 		}
 		void board()

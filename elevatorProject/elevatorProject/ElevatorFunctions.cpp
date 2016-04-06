@@ -24,7 +24,7 @@ void Elevator::progression(vector<User> &peopleWait, vector<User> &peopleAccepte
 	else
 	{
 		visualize(peopleWait, peopleAccepted, peopleProgress, peopleDone);
-		if (!peopleWait.empty())
+		if (!peopleWait.empty()) // Changing direction when done with direction
 		{
 			if (currentPriorities.size() == 0)
 			{
@@ -39,7 +39,7 @@ void Elevator::progression(vector<User> &peopleWait, vector<User> &peopleAccepte
 					cout << "Down established!" << endl;*/
 			}
 		}
-		if (!peopleWait.empty())
+		if (!peopleWait.empty()) // Accepting people
 		{
 			for (int i = 0; i < peopleWait.size(); i++)
 			{
@@ -65,24 +65,24 @@ void Elevator::progression(vector<User> &peopleWait, vector<User> &peopleAccepte
 							}
 						}
 					}
-					if (currentPriorities.get() == MINFLOOR)
+				}
+				if (currentPriorities.get() == MINFLOOR)
+				{
+					if (peopleWait[i].getCurrentFloor() <= currentFloor)
 					{
-						if (peopleWait[i].getCurrentFloor() <= currentFloor)
+						if (peopleWait[i].getIntendedDirection() == DOWN)
 						{
-							if (peopleWait[i].getIntendedDirection() == DOWN)
-							{
-								addAccepted = true;
-							}
+							addAccepted = true;
 						}
 					}
-					if (currentPriorities.get() == MAXFLOOR)
+				}
+				if (currentPriorities.get() == MAXFLOOR)
+				{
+					if (peopleWait[i].getCurrentFloor() >= currentFloor)
 					{
-						if (peopleWait[i].getCurrentFloor() >= currentFloor)
+						if (peopleWait[i].getIntendedDirection() == UP)
 						{
-							if (peopleWait[i].getIntendedDirection() == UP)
-							{
-								addAccepted = true;
-							}
+							addAccepted = true;
 						}
 					}
 				}
@@ -92,6 +92,7 @@ void Elevator::progression(vector<User> &peopleWait, vector<User> &peopleAccepte
 					peopleAccepted.push_back(peopleWait[i]); // Add to accepted list
 					deletion.push_back(i); // Add to deletion list, to be removed from wait list
 				}
+				addAccepted = false;
 			}
 		}
 		deleteEntries(peopleWait, deletion);
@@ -162,7 +163,14 @@ void Elevator::visualize(vector<User> peopleWait, vector<User> peopleAccepted, v
 {
 	cout << "Current floor: " << currentFloor << " |Current Destination: ";
 	if (!currentPriorities.empty())
+	{
 		cout << currentPriorities.get() << " |";
+		cout << "Current Direction: ";
+		if (currentPriorities.getCurrentDirection() == DOWN)
+			cout << "DOWN | ";
+		else
+			cout << "UP |";
+	}		
 	else
 		cout << "E | ";
 	cout << "Current Status: ";

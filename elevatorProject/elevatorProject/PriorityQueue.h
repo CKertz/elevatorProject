@@ -36,6 +36,7 @@ class prioritize
 		direction currentDirection;
 	public:
 		prioritize() {}
+		direction getCurrentDirection() { return currentDirection; }
 		void changeDirection(direction newDirection)
 		{
 			currentDirection = newDirection;
