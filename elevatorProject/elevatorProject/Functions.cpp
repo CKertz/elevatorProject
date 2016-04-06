@@ -5,14 +5,13 @@
 
 using namespace std;
 
-void simulation(Elevator &elevator, vector<User>&people)
+void simulation(Elevator &elevator, vector<User> &peopleWait, vector<User> &peopleAccepted, vector<User> &peopleProgress, vector<User> &peopleDone)
 {
 	//Declarations:
-	vector<User>::iterator peopleITR;
 	int total = 0;
 	//First User is always generated
-	User* temp = new User;
-	people.push_back(*temp);
+	User* temp = new User(total);
+	peopleWait.push_back(*temp);
 	temp->printUserStats();
 	//system("pause");
 	total++;
@@ -21,10 +20,11 @@ void simulation(Elevator &elevator, vector<User>&people)
 	//cout << "First user created!" << endl;
 	do
 	{
-		elevator.progress(people);
-		generateUser(people, total);
+		//elevator.progress(people);
+		elevator.progression(peopleWait, peopleAccepted, peopleProgress, peopleDone);
+		generateUser(peopleWait, total);
 	} 
-	while (!allUsersArrived(people) && total != MAXUSERS);	
+	while (peopleDone.size() != MAXUSERS);	
 }
 
 void generateUser(vector<User> &people, int &total) // Used to create new people for the scenario
@@ -35,7 +35,7 @@ void generateUser(vector<User> &people, int &total) // Used to create new people
 		if (dice % 2) // If even, add a user
 		{
 			cout << "User generated!" << endl;
-			User* temp = new User;
+			User* temp = new User(total);
 			people.push_back(*temp);
 			temp->printUserStats();
 			//system("pause");
@@ -67,5 +67,17 @@ void incrementTimeAllUsers(vector<User> &people, bool didStop)
 	{	
 		itr->incrementTime(didStop);
 		itr++;
+	}
+}
+
+void deleteEntries(vector<User> &people, const vector<int> deletion)
+{
+	int deletes = 0;
+	int temp;
+	for (int i = 0; i < deletion.size(); i++)
+	{
+		temp = deletion[i] - deletes;
+		people.erase(people.begin() + temp);
+		deletes++;
 	}
 }

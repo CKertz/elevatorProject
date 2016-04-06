@@ -24,6 +24,9 @@
     <ClCompile Include="ElevatorProgressFunction.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="ElevatorFunctions.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="elevator.h">

@@ -9,6 +9,8 @@ using namespace std;
 class User
 {
 	private:
+		int creationOrder;
+		int originalCurrent;
 		int currentFloor;
 		int desiredFloor;
 		int waitForElevatorTime;
@@ -19,8 +21,9 @@ class User
 		direction outSideRequest;
 	public:
 		//The Default Constructor
-		User()
+		User(int total)
 		{
+			creationOrder = total;
 			int temp;
 			waitForElevatorTime = 0;
 			waitForDestinationTime = 0;
@@ -53,14 +56,17 @@ class User
 			onElevator = false;
 			hasArrived = false;
 			if (desiredFloor > MAXFLOOR)
-				desiredFloor == MAXFLOOR;
+				desiredFloor = 8;
 			if (desiredFloor < MINFLOOR)
-				desiredFloor == MINFLOOR;
+				desiredFloor = 1;
+			originalCurrent = currentFloor;
 		}
 		//Getter functions
 		int getCurrentFloor() { return currentFloor; }
-		int getInsideRequest() { return desiredFloor; }
-		direction getOutSideRequest() { return outSideRequest; }
+		//int getInsideRequest() { return desiredFloor; }  // To be depricated
+		int getDesiredFloor() { return desiredFloor; }
+		//direction getOutSideRequest() { return outSideRequest; } // To be depricated
+		direction getIntendedDirection() { return outSideRequest; }
 		//Function used to print the stats of users
 		void printUserStats()
 		{
@@ -73,7 +79,7 @@ class User
 			{
 				cout << "Request Up" << endl;
 			}
-			cout << currentFloor << " " <<  desiredFloor << " " << waitForElevatorTime << " " << waitForDestinationTime << " " << totalWaitTime << endl;
+			cout << originalCurrent << " " << currentFloor << " " <<  desiredFloor << " " << waitForElevatorTime << " " << waitForDestinationTime << " " << totalWaitTime << endl;
 			cout << endl;
 		}
 		void board()

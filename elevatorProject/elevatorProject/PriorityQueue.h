@@ -5,36 +5,78 @@
 
 using namespace std;
 
-//priorityQueue class based on example given in slides and source code from Blackboard
+// compare class inspired by example (myComparison) given on this page: http://www.cplusplus.com/reference/queue/priority_queue/priority_queue/
 
-template < typename itemType, typename compare = greater<itemType> >
-
-//Attempt to make a universal priorityQueue. Use the direction enum to help
-class priorityUpQueue
-{ 
+class compare
+{
 	private:
-		vector<itemType> data;
-		compare comp;
+		bool isUP;
 	public:
-		priorityUpQueue() {}
-		void push(const itemType& item)
+		void changeIsUp(direction newDirection)
 		{
-			data.push_back(item);
-			int child = size() - 1; 
-			int parent = (child - 1) / 2;
-			while (parent >= 0 && comp(data[parent], data[child]))
-			{
-				swap(data[child], data[parent]);
-				child = parent;
-				parent = (child - 1) / 2;
-			}
+			if (newDirection == UP)
+				isUP = true;
+			else
+				isUP = false;
 		}
-		void pop()
+		bool operator() (const int& leftHandSide, const int& rightHandSide) const
 		{
-			if (size() == 1) { data.pop_back(); return; }
-			swap(data[0], data[size() - 1]);
-			data.pop_back();
+			if (isUP) return (leftHandSide > rightHandSide);
+			else return (leftHandSide < rightHandSide);
+		}
+};
+
+//prioritize class based on the priority_queue class from the lecture slides
+
+class prioritize
+{
+	private:
+		vector<int> floors;
+		compare current;
+		direction currentDirection;
+	public:
+		prioritize() {}
+		void changeDirection(direction newDirection)
+		{
+			currentDirection = newDirection;
+			current.changeIsUp(newDirection);
+		}
+		void add(const int& floor)
+		{
+			floors.push_back(floor);
+			int child = floors.size() - 1;
+			int parent = (child - 1) / 2;
+			if (currentDirection == UP)
+			{
+				while (parent >= 0 && current(floors[parent], floors[child]))
+				{
+					swap(floors[child], floors[parent]);
+					child = parent;
+					parent = (child - 1) / 2;
+				}
+			}
+			else
+			{
+				while (parent >= 0 && current(floors[parent], floors[child]))
+				{
+					swap(floors[child], floors[parent]);
+					child = parent;
+					parent = (child - 1) / 2;
+				}
+			}
+			
+		}
+		void complete()
+		{
+			if (size() == 1)
+			{
+				floors.pop_back();
+				return;
+			}
+			swap(floors[0], floors[size() - 1]);
+			floors.pop_back();
 			int parent = 0;
+
 			while (true)
 			{
 				int leftChild = 2 * parent + 1;
@@ -42,68 +84,138 @@ class priorityUpQueue
 					break;
 				int rightChild = leftChild + 1;
 				int maxChild = leftChild;
-				if (rightChild < size() && comp(data[leftChild], data[rightChild]))
-					maxChild = rightChild;
-				if (comp(data[parent], data[maxChild]))
+				if (currentDirection = UP)
 				{
-					swap(data[maxChild], data[parent]);
-					parent = maxChild;
+					if (rightChild < size() && current(floors[leftChild], floors[rightChild]))
+						maxChild = rightChild;
+					if (current(floors[parent], floors[maxChild]))
+					{
+						swap(floors[maxChild], floors[parent]);
+						parent = maxChild;
+					}
+					else
+						break;
 				}
 				else
-					break;
+				{
+					if (rightChild < size() && current(floors[leftChild], floors[rightChild]))
+						maxChild = rightChild;
+					if (current(floors[parent], floors[maxChild]))
+					{
+						swap(floors[maxChild], floors[parent]);
+						parent = maxChild;
+					}
+					else
+						break;
+				}
 			}
 		}
-		bool empty() const { return data.empty(); }
-		int size() const { return data.size(); }
-		const itemType& top() const { return data.front(); }
+		bool empty() const { return floors.empty(); }
+		int size() const { return floors.size(); }
+		const int& get() const { return floors.front(); }
 };
 
-template < typename itemType, typename compare = less<itemType> >
 
-class priorityDownQueue
-{
-private:
-	vector<itemType> data;
-	compare comp;
-public:
-	priorityDownQueue() {}
-	void push(const itemType& item)
-	{
-		data.push_back(item);
-		int child = size() - 1;
-		int parent = (child - 1) / 2;
-		while (parent >= 0 && comp(data[parent], data[child]))
-		{
-			swap(data[child], data[parent]);
-			child = parent;
-			parent = (child - 1) / 2;
-		}
-	}
-	void pop()
-	{
-		if (size() == 1) { data.pop_back(); return; }
-		swap(data[0], data[size() - 1]);
-		data.pop_back();
-		int parent = 0;
-		while (true)
-		{
-			int leftChild = 2 * parent + 1;
-			if (leftChild >= size())
-				break;
-			int rightChild = leftChild + 1;
-			int maxChild = leftChild;
-			if (rightChild < size() && comp(data[leftChild], data[rightChild]))
-				maxChild = rightChild;
-			if (comp(data[parent], data[maxChild]))
-			{
-				swap(data[maxChild], data[parent]);
-				parent = maxChild;
-			}
-			else
-				break;
-		}
-	}
-	bool empty() const { return data.empty(); }
-	int size() const { return data.size(); }
-	const itemType& top() const { return data.front(); }
-};
+
+////priorityQueue class based on example given in slides and source code from Blackboard
+//
+//template < typename itemType, typename compare = greater<itemType> >
+//
+////Attempt to make a universal priorityQueue. Use the direction enum to help
+//class priorityUpQueue
+//{ 
+//	private:
+//		vector<itemType> data;
+//		compare comp;
+//	public:
+//		priorityUpQueue() {}
+//		void push(const itemType& item)
+//		{
+//			data.push_back(item);
+//			int child = size() - 1; 
+//			int parent = (child - 1) / 2;
+//			while (parent >= 0 && comp(data[parent], data[child]))
+//			{
+//				swap(data[child], data[parent]);
+//				child = parent;
+//				parent = (child - 1) / 2;
+//			}
+//		}
+//		void pop()
+//		{
+//			if (size() == 1) { data.pop_back(); return; }
+//			swap(data[0], data[size() - 1]);
+//			data.pop_back();
+//			int parent = 0;
+//			while (true)
+//			{
+//				int leftChild = 2 * parent + 1;
+//				if (leftChild >= size())
+//					break;
+//				int rightChild = leftChild + 1;
+//				int maxChild = leftChild;
+//				if (rightChild < size() && comp(data[leftChild], data[rightChild]))
+//					maxChild = rightChild;
+//				if (comp(data[parent], data[maxChild]))
+//				{
+//					swap(data[maxChild], data[parent]);
+//					parent = maxChild;
+//				}
+//				else
+//					break;
+//			}
+//		}
+//		bool empty() const { return data.empty(); }
+//		int size() const { return data.size(); }
+//		const itemType& top() const { return data.front(); }
+//};
+//
+//template < typename itemType, typename compare = less<itemType> >
+//
+//class priorityDownQueue
+//{
+//private:
+//	vector<itemType> data;
+//	compare comp;
+//public:
+//	priorityDownQueue() {}
+//	void push(const itemType& item)
+//	{
+//		data.push_back(item);
+//		int child = size() - 1;
+//		int parent = (child - 1) / 2;
+//		while (parent >= 0 && comp(data[parent], data[child]))
+//		{
+//			swap(data[child], data[parent]);
+//			child = parent;
+//			parent = (child - 1) / 2;
+//		}
+//	}
+//	void pop()
+//	{
+//		if (size() == 1) { data.pop_back(); return; }
+//		swap(data[0], data[size() - 1]);
+//		data.pop_back();
+//		int parent = 0;
+//		while (true)
+//		{
+//			int leftChild = 2 * parent + 1;
+//			if (leftChild >= size())
+//				break;
+//			int rightChild = leftChild + 1;
+//			int maxChild = leftChild;
+//			if (rightChild < size() && comp(data[leftChild], data[rightChild]))
+//				maxChild = rightChild;
+//			if (comp(data[parent], data[maxChild]))
+//			{
+//				swap(data[maxChild], data[parent]);
+//				parent = maxChild;
+//			}
+//			else
+//				break;
+//		}
+//	}
+//	bool empty() const { return data.empty(); }
+//	int size() const { return data.size(); }
+//	const itemType& top() const { return data.front(); }
+//};
