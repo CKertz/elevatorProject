@@ -12,7 +12,7 @@ void simulation(Elevator &elevator, vector<User> &peopleWait, vector<User> &peop
 	//First User is always generated
 	User* temp = new User(total);
 	peopleWait.push_back(*temp);
-	temp->printUserStats();
+	//temp->printUserStats();
 	//system("pause");
 	total++;
 	///////////////
@@ -32,33 +32,16 @@ void generateUser(vector<User> &people, int &total) // Used to create new people
 		int dice = rand() % 6 + 1; // Roll six sided dice to determine if a user is generated or not
 		if (dice % 2) // If even, add a user
 		{
-			cout << "User generated!" << endl;
 			User* temp = new User(total);
 			people.push_back(*temp);
-			temp->printUserStats();
+			//temp->printUserStats();
 			total++;
 		}
 	}		
 }
 
-bool allUsersArrived(vector<User> &people)
-{
-	bool allArrived = true;
-	vector<User>::iterator itr = people.begin();
-	while (itr != people.end())
-	{
-		if (!(itr->arrived()))
-		{
-			allArrived = false;
-		}
-		itr++;
-	}
-	return allArrived;
-}
-
 void incrementTimeAllUsers(vector<User> &people, bool didStop)
 {	
-	//cout << "Time incremented" << endl; 
 	vector<User>::iterator itr = people.begin();
 	while (itr != people.end())
 	{	

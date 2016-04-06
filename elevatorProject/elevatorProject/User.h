@@ -59,6 +59,17 @@ class User
 				desiredFloor = 8;
 			if (desiredFloor < MINFLOOR)
 				desiredFloor = 1;
+			if (currentFloor == desiredFloor)
+			{
+				if (desiredFloor < MAXFLOOR)
+				{
+					desiredFloor++;
+				}
+				else
+				{
+					desiredFloor--;
+				}
+			}
 			originalCurrent = currentFloor;
 		}
 		//Getter functions

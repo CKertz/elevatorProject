@@ -12,6 +12,9 @@ class Elevator
 		int currentFloor;
 		prioritize currentPriorities;
 		direction currentDirection;
+		bool boarding;
+		bool arriving;
+		bool idle;
 	public:
 		Elevator() { currentFloor = 1; }
 		int getFloor() { return currentFloor; };
@@ -30,5 +33,5 @@ class Elevator
 				exception("At lowest floor!");
 		};
 		void progression(vector<User> &peopleWait, vector<User> &peopleAccepted, vector<User> &peopleProgress, vector<User> &peopleDone);
+		void visualize(vector<User> peopleWait, vector<User> peopleAccepted, vector<User> peopleProgress, vector<User> peopleDone);
 };
-

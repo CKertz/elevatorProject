@@ -15,7 +15,9 @@ int main()
 	Elevator elevator;
 	srand(time(NULL));
 	///////////////
-	cout << "Begin simulation" << endl;
+	cout << "Press any key to begin simulation" << endl;
+	system("pause");
+	system("cls");
 	simulation(elevator, peopleWait, peopleAccepted, peopleProgress, peopleDone);
 	cout << peopleDone.size() << endl;
 	for (int i = 0; i < MAXUSERS; i++)
