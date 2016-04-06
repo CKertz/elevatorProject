@@ -11,8 +11,6 @@ class Elevator
 	private:
 		int currentFloor;
 		prioritize currentPriorities;
-		//priorityUpQueue<int> goingUp;
-		//priorityDownQueue<int> goingDown;
 		direction currentDirection;
 	public:
 		Elevator() { currentFloor = 1; }
@@ -31,7 +29,6 @@ class Elevator
 			else
 				exception("At lowest floor!");
 		};
-		//void progress(vector<User>&people);
 		void progression(vector<User> &peopleWait, vector<User> &peopleAccepted, vector<User> &peopleProgress, vector<User> &peopleDone);
 };
 
