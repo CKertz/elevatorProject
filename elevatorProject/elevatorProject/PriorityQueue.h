@@ -46,25 +46,12 @@ class prioritize
 			floors.push_back(floor);
 			int child = floors.size() - 1;
 			int parent = (child - 1) / 2;
-			if (currentDirection == UP)
+			while (parent >= 0 && current(floors[parent], floors[child]))
 			{
-				while (parent >= 0 && current(floors[parent], floors[child]))
-				{
-					swap(floors[child], floors[parent]);
-					child = parent;
-					parent = (child - 1) / 2;
-				}
+				swap(floors[child], floors[parent]);
+				child = parent;
+				parent = (child - 1) / 2;
 			}
-			else
-			{
-				while (parent >= 0 && current(floors[parent], floors[child]))
-				{
-					swap(floors[child], floors[parent]);
-					child = parent;
-					parent = (child - 1) / 2;
-				}
-			}
-			
 		}
 		void complete()
 		{
@@ -84,30 +71,15 @@ class prioritize
 					break;
 				int rightChild = leftChild + 1;
 				int maxChild = leftChild;
-				if (currentDirection = UP)
+				if (rightChild < size() && current(floors[leftChild], floors[rightChild]))
+					maxChild = rightChild;
+				if (current(floors[parent], floors[maxChild]))
 				{
-					if (rightChild < size() && current(floors[leftChild], floors[rightChild]))
-						maxChild = rightChild;
-					if (current(floors[parent], floors[maxChild]))
-					{
-						swap(floors[maxChild], floors[parent]);
-						parent = maxChild;
-					}
-					else
-						break;
+					swap(floors[maxChild], floors[parent]);
+					parent = maxChild;
 				}
 				else
-				{
-					if (rightChild < size() && current(floors[leftChild], floors[rightChild]))
-						maxChild = rightChild;
-					if (current(floors[parent], floors[maxChild]))
-					{
-						swap(floors[maxChild], floors[parent]);
-						parent = maxChild;
-					}
-					else
-						break;
-				}
+					break;
 			}
 		}
 		bool empty() const { return floors.empty(); }

@@ -77,7 +77,7 @@ class User
 			{
 				cout << "Request Up" << endl;
 			}
-			cout << originalCurrent << " " << currentFloor << " " <<  desiredFloor << " " << waitForElevatorTime << " " << waitForDestinationTime << " " << totalWaitTime << endl;
+			cout << originalCurrent << " " << currentFloor << " " << desiredFloor << " " << endl;//<< waitForElevatorTime << " " << waitForDestinationTime << " " << totalWaitTime << endl;
 			cout << endl;
 		}
 		void board()
@@ -106,7 +106,7 @@ class User
 				baseTime *= 10;
 			if (!hasArrived)
 			{
-				cout << "Increment!" << endl;
+				//cout << "Increment!" << endl;
 				if (!onElevator)
 				{
 					waitForElevatorTime += baseTime;

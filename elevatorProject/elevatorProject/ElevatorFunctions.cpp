@@ -16,7 +16,12 @@ void Elevator::progression(vector<User> &peopleWait, vector<User> &peopleAccepte
 	vector<int> deletion;
 	
 	cout << "Elevator current floor: " << currentFloor << endl;
-	cout << peopleWait.size() << endl;
+	cout << "Number of people waiting: " << peopleWait.size() << endl;
+	cout << "Number of people accepted: " << peopleAccepted.size() << endl;
+	cout << "Number of people on elevator: " << peopleProgress.size() << endl;
+	cout << "Number of people done: " << peopleDone.size() << endl;
+	if (!currentPriorities.empty())
+		cout << "Current priority: " << currentPriorities.get() << endl;
 	if (!peopleWait.empty())
 	{
 		if (currentPriorities.size() == 0)

@@ -58,7 +58,7 @@ bool allUsersArrived(vector<User> &people)
 
 void incrementTimeAllUsers(vector<User> &people, bool didStop)
 {	
-	cout << "Time incremented" << endl; 
+	//cout << "Time incremented" << endl; 
 	vector<User>::iterator itr = people.begin();
 	while (itr != people.end())
 	{	
