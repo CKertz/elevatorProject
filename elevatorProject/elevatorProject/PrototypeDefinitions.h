@@ -10,6 +10,5 @@ using namespace std;
 
 void simulation(Elevator &elevator, vector<User> &peopleWait, vector<User> &peopleAccepted, vector<User> &peopleProgress, vector<User> &peopleDone);
 void generateUser(vector<User> &people, int &total);
-//bool allUsersArrived(vector<User> &people);
 void incrementTimeAllUsers(vector<User> &people, bool didStop);
 void deleteEntries(vector<User> &people, const vector<int> deletion);

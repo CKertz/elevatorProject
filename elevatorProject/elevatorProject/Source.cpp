@@ -22,5 +22,6 @@ int main()
 	{
 		peopleDone[i].printUserStats();
 	}
+	system("pause");
 	return 0;
 }

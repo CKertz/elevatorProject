@@ -147,7 +147,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="ElevatorFunctions.cpp" />
-    <ClCompile Include="ElevatorProgressFunction.cpp" />
     <ClCompile Include="Functions.cpp" />
     <ClCompile Include="Source.cpp" />
   </ItemGroup>

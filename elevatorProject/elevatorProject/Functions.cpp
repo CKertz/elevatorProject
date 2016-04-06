@@ -17,10 +17,8 @@ void simulation(Elevator &elevator, vector<User> &peopleWait, vector<User> &peop
 	total++;
 	///////////////
 	//Loop while the arrivedList does not contain the max amount of the users the program can generate
-	//cout << "First user created!" << endl;
 	do
 	{
-		//elevator.progress(people);
 		elevator.progression(peopleWait, peopleAccepted, peopleProgress, peopleDone);
 		generateUser(peopleWait, total);
 	} 
@@ -38,7 +36,6 @@ void generateUser(vector<User> &people, int &total) // Used to create new people
 			User* temp = new User(total);
 			people.push_back(*temp);
 			temp->printUserStats();
-			//system("pause");
 			total++;
 		}
 	}		

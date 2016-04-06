@@ -63,9 +63,7 @@ class User
 		}
 		//Getter functions
 		int getCurrentFloor() { return currentFloor; }
-		//int getInsideRequest() { return desiredFloor; }  // To be depricated
 		int getDesiredFloor() { return desiredFloor; }
-		//direction getOutSideRequest() { return outSideRequest; } // To be depricated
 		direction getIntendedDirection() { return outSideRequest; }
 		//Function used to print the stats of users
 		void printUserStats()
