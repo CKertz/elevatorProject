@@ -3,6 +3,7 @@
 #include "elevator.h"
 #include "PrototypeDefinitions.h"
 #include "PriorityQueue.h"
+#include "Windows.h"
 #include <iostream>
 
 using namespace std;
@@ -24,10 +25,8 @@ void Elevator::progression(vector<User> &peopleWait, vector<User> &peopleAccepte
 	else
 	{
 		visualize(peopleWait, peopleAccepted, peopleProgress, peopleDone);
-		//cout << "here" << endl;
 		if (!peopleWait.empty()) // Changing direction when done with direction
 		{
-			//cout << "empty" << endl;
 			if (currentPriorities.size() == 0)
 			{
 				currentDirection = peopleWait.front().getIntendedDirection();
@@ -50,10 +49,8 @@ void Elevator::progression(vector<User> &peopleWait, vector<User> &peopleAccepte
 		{
 			currentPriorities.add(peopleProgress[0].getDesiredFloor());
 		}
-		//cout << "here1" << endl;
 		deleteEntries(peopleWait, deletion);
 		deletion.clear();
-		//cout << "here2" << endl;
 		if (!peopleWait.empty()) // Accepting people
 		{
 			for (int i = 0; i < peopleWait.size(); i++)
@@ -112,29 +109,17 @@ void Elevator::progression(vector<User> &peopleWait, vector<User> &peopleAccepte
 				addAccepted = false;
 			}
 		}
-		//cout << "here3" << endl;
 		deleteEntries(peopleWait, deletion);
 		deletion.clear();
-		//cout << "here4" << endl;
 		if (!currentPriorities.empty())
 		{
 			atStop = (currentPriorities.get() == currentFloor); // Check if the currentFloor is a stop point
-			//cout << "here4-1" << endl;
-		}//cout << "here4-2" << endl;	
-		/*if (atStop)
-			cout << "true" << endl;
-		else
-			cout << "false" << endl;*/
-		//cout << "here5" << endl;
+		}
 		if (atStop) //If the floor the elevator is at is one of its destinations (atStop == true) then this statment will run
 		{
-			//cout << "here5-1" << endl;
-			//cout << "here5-1" << endl;
-			//cout << "here5-1" << endl;
 			incrementTimeAllUsers(peopleWait, true);
 			incrementTimeAllUsers(peopleAccepted, true);
 			incrementTimeAllUsers(peopleProgress, true);
-			//cout << "here5-2" << endl;
 			for (int i = 0; i < peopleAccepted.size(); i++) // Check to see who gets on the elevator
 			{
 				if (peopleAccepted[i].getCurrentFloor() == currentFloor) // They must have already been accepted to get on, meaning they have the same direction and are on the way to the elevator's destination
@@ -148,10 +133,8 @@ void Elevator::progression(vector<User> &peopleWait, vector<User> &peopleAccepte
 				}
 				boarding = false;
 			}
-			//cout << "here5-3" << endl;
 			deleteEntries(peopleAccepted, deletion);
 			deletion.clear();
-			//cout << "here5-4" << endl;
 			for (int i = 0; i < peopleProgress.size(); i++)
 			{
 				if (peopleProgress[i].getDesiredFloor() == currentFloor)
@@ -164,12 +147,9 @@ void Elevator::progression(vector<User> &peopleWait, vector<User> &peopleAccepte
 				}
 				arriving = false;
 			}
-			//cout << "here5-5" << endl;
 			deleteEntries(peopleProgress, deletion);
 			deletion.clear();
-			//cout << "here5-6" << endl;
 			currentPriorities.complete();
-			//cout << "here5-7" << endl;
 			if (!currentPriorities.empty())
 			{
 				if (currentPriorities.get() == currentFloor) //If the current priority is still equal to the current floor due to duplicates
@@ -182,19 +162,13 @@ void Elevator::progression(vector<User> &peopleWait, vector<User> &peopleAccepte
 					}
 				}
 			}
-			//cout << "here5-8" << endl;
 		}
 		else
 		{
-			//cout << "here5-9" << endl;
-			//cout << "here5-9" << endl;
-			//cout << "here5-9" << endl;
 			incrementTimeAllUsers(peopleWait, false);
 			incrementTimeAllUsers(peopleAccepted, false);
 			incrementTimeAllUsers(peopleProgress, false);
-			//cout << "here5-10" << endl;
 		}
-		//cout << "here6" << endl;
 		if (!currentPriorities.empty())
 		{
 			if (currentPriorities.get() > currentFloor)
@@ -205,7 +179,7 @@ void Elevator::progression(vector<User> &peopleWait, vector<User> &peopleAccepte
 			{
 				goDown();
 			}
-		}//cout << "here7" << endl;
+		}
 	}
 	//visualize(peopleWait, peopleAccepted, peopleProgress, peopleDone);
 }
@@ -302,6 +276,7 @@ void Elevator::visualize(vector<User> peopleWait, vector<User> peopleAccepted, v
 		}
 	}
 	cout << "-------------------------------------------------------------------------------------------------------------------------" << endl;
-	//system("pause");
+	//system("pause"); //used for manual progression
+	Sleep(500);
 	system("cls");
 }

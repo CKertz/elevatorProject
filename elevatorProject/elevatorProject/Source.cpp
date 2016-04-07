@@ -11,7 +11,8 @@ int main()
 	system("pause");
 	system("cls");
 	srand(time(NULL));
-	while (true)
+	char exit = '0';
+	while (exit != 'e')
 	{
 		//Declarations:
 		vector<User> peopleWait;
@@ -23,10 +24,13 @@ int main()
 		simulation(elevator, peopleWait, peopleAccepted, peopleProgress, peopleDone);
 		cout << "Simulation Results:" << endl;
 		cout << "Total Users: " << peopleDone.size() << "  | Building Height: " << MAXFLOOR << endl;
+		cout << "Notice: Time units are arbitrary." << endl;
 		for (int i = 0; i < MAXUSERS; i++)
 		{
 			peopleDone[i].printUserStats();
 		}
-	}	
+		cout << "Simulation complete. Press any key to run again. Press 'e' to exit. " << endl;
+		cin >> exit;
+	}
 	return 0;
 }
