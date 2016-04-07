@@ -1,3 +1,8 @@
+// Elevator Project
+// April 2016
+// William Munshaw, Cooper Kertz, Amy Curtis
+// File: Functions.cpp
+
 #include "Header.h"
 #include "User.h"
 #include "elevator.h"

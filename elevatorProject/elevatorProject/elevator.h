@@ -1,3 +1,8 @@
+// Elevator Project
+// April 2016
+// William Munshaw, Cooper Kertz, Amy Curtis
+// File: Elevator.h
+
 #pragma once
 #include <vector>
 #include <string>
