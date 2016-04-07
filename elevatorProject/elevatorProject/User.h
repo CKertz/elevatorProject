@@ -56,9 +56,9 @@ class User
 			onElevator = false;
 			hasArrived = false;
 			if (desiredFloor > MAXFLOOR)
-				desiredFloor = 8;
+				desiredFloor = MAXFLOOR;
 			if (desiredFloor < MINFLOOR)
-				desiredFloor = 1;
+				desiredFloor = MINFLOOR;
 			if (currentFloor == desiredFloor)
 			{
 				if (desiredFloor < MAXFLOOR)

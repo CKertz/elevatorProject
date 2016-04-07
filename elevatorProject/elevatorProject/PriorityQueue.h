@@ -56,6 +56,10 @@ class prioritize
 		}
 		void complete()
 		{
+			if (size() == 0)
+			{
+				return;
+			}
 			if (size() == 1)
 			{
 				floors.pop_back();
